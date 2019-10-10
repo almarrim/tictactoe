@@ -12,6 +12,8 @@
   transform: translateX(-50%) translateY(-50%);
 }
 body {
+  padding: 0;
+  margin: 0;
   background-color: rgb(36, 35, 35);
   color: rgb(196, 185, 185);
 }
@@ -26,4 +28,13 @@ body {
 }
 .green {
   background-color: green;
+}
+.blocker {
+  width: 100%;
+  height: 1000px;
+  background-color: rgba(134, 17, 17, 0.404);
+}
+
+.zindex {
+  z-index: -1;
 }
