@@ -1,0 +1,29 @@
+.items {
+  border: 1px solid lightblue;
+  background-color: lightslategray;
+}
+.board {
+  background-color: lightpink;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+body {
+  background-color: rgb(36, 35, 35);
+  color: rgb(196, 185, 185);
+}
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
