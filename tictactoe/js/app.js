@@ -22,16 +22,16 @@ const clicked = function () {
     this.removeEventListener('mouseenter', turnGreen);
     this.removeEventListener('mouseenter', turnRed);
     this.removeEventListener('mouseout', turnDefault);
+    this.removeEventListener('click', clicked)
     if (playerGreen) {
         greenClicked.push(this);
     }
-    else {
+    if (playerRed) {
         redClicked.push(this);
     }
     this.classList.value += ' clicked';
     clickedItems.push(this);
-    gameStatus();
-    changeTurn();
+    gamePlay();
 }
 for (i of items) {
     i.addEventListener('mouseenter', turnGreen);
@@ -60,8 +60,8 @@ const restIt = function (x) {
         while (redClicked.length > 0) {
             redClicked.pop();
         }
-        playerGreen = false;
-        playerRed = true;
+        playerGreen = true;
+        playerRed = false;
         board.className = 'board';
         return console.log('this is a new game');
     }
@@ -69,47 +69,80 @@ const restIt = function (x) {
         board.className += ' zindex';
         return console.log('see ya later dogg');
     }
-
-
 }
 const gameStatus = function () {
     if ((greenClicked.includes(items[0]) && greenClicked.includes(items[1]) && greenClicked.includes(items[2])) || (greenClicked.includes(items[3]) && greenClicked.includes(items[4]) && greenClicked.includes(items[5])) || (greenClicked.includes(items[6]) && greenClicked.includes(items[7]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[3]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[1]) && greenClicked.includes(items[4]) && greenClicked.includes(items[7])) || ((greenClicked.includes(items[2]) && greenClicked.includes(items[5]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[2]) && greenClicked.includes(items[4]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[4]) && greenClicked.includes(items[8]))
     )) {
 
         alert('congragulations yo green')
-        const x = prompt('wanna play again? y for yes, or enter anyting to exit');
-        restIt(x);
+        return false;
+
+
     }
     if ((redClicked.includes(items[0]) && redClicked.includes(items[1]) && redClicked.includes(items[2])) || (redClicked.includes(items[3]) && redClicked.includes(items[4]) && redClicked.includes(items[5])) || (redClicked.includes(items[6]) && redClicked.includes(items[7]) && redClicked.includes(items[8])) || (redClicked.includes(items[0]) && redClicked.includes(items[3]) && redClicked.includes(items[6])) || (redClicked.includes(items[1]) && redClicked.includes(items[4]) && redClicked.includes(items[7])) || ((redClicked.includes(items[2]) && redClicked.includes(items[5]) && redClicked.includes(items[8])) || (redClicked.includes(items[2]) && redClicked.includes(items[4]) && redClicked.includes(items[6])) || (redClicked.includes(items[0]) && redClicked.includes(items[4]) && redClicked.includes(items[8]))
     )) {
 
         alert('congragulations yo red')
-        const x = prompt('wanna play again? y for yes, or enter anything to exit');
-        restIt(x);
+        return false;
     }
     if (clickedItems.length == 9) {
         alert('no more there, tie the tie')
+        return false;
+    }
+    return true;
+}
+
+const dumbComp = function () {
+    if (clickedItems.length < 9) {
+        let selection = items[Math.floor(Math.random() * 9)];
+        let i = 0;
+        while (i == 0) {
+            if (!(clickedItems.includes(selection))) {
+                selection.className += ' red';
+                clickedItems.push(selection);
+                redClicked.push(selection);
+                selection.removeEventListener('mouseenter', turnGreen);
+                selection.removeEventListener('mouseenter', turnRed);
+                selection.removeEventListener('mouseout', turnDefault);
+
+                i++;
+            }
+            else {
+                selection = items[Math.floor(Math.random() * 9)];
+            }
+        }
+    }
+    setTimeout(gamePlay, 10);
+}
+
+const changeTurn = function () {
+    if (clickedItems.length < 9) {
+        if (playerGreen) {
+            playerGreen = !playerGreen;
+            playerRed = !playerRed;
+        }
+        else {
+            playerGreen = !playerGreen;
+            playerRed = !playerRed;
+        }
+    }
+}
+
+const gamePlay = function () {
+    if (gameStatus()) {
+        changeTurn()
+        if (playerRed) {
+            dumbComp()
+        }
+    }
+    else {
         const x = prompt('wanna play again? y for yes, or enter anything to exit');
         restIt(x);
     }
 }
 
-const changeTurn = function () {
-    if (playerGreen) {
-        playerGreen = !playerGreen;
-        playerRed = !playerRed;
-    }
-    else {
-        playerGreen = !playerGreen;
-        playerRed = !playerRed;
-    }
-
-}
-
-
 const playIt = function () {
     restIt('y');
-    changeTurn();
 }
 const playagain = document.querySelector('.playagain');
 playagain.addEventListener('click', playIt);
