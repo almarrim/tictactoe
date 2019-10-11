@@ -1,5 +1,6 @@
 console.log('hey man')
 const items = document.querySelectorAll('.items');
+const board = document.querySelector('.board');
 const clickedItems = [];
 const greenClicked = [];
 const redClicked = [];
@@ -30,7 +31,13 @@ const clicked = function () {
     this.classList.value += ' clicked';
     clickedItems.push(this);
     gameStatus();
-    gamePlay();
+    changeTurn();
+}
+for (i of items) {
+    i.addEventListener('mouseenter', turnGreen);
+    i.addEventListener('mouseenter', turnRed);
+    i.addEventListener('mouseout', turnDefault);
+    i.addEventListener('click', clicked);
 }
 const restIt = function (x) {
 
@@ -55,41 +62,39 @@ const restIt = function (x) {
         }
         playerGreen = false;
         playerRed = true;
-        return console.log('this is a new game')
+        board.className = 'board';
+        return console.log('this is a new game');
     }
     else {
-        document.querySelector('.board').className += ' zindex';
+        board.className += ' zindex';
         return console.log('see ya later dogg');
     }
+
+
 }
 const gameStatus = function () {
     if ((greenClicked.includes(items[0]) && greenClicked.includes(items[1]) && greenClicked.includes(items[2])) || (greenClicked.includes(items[3]) && greenClicked.includes(items[4]) && greenClicked.includes(items[5])) || (greenClicked.includes(items[6]) && greenClicked.includes(items[7]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[3]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[1]) && greenClicked.includes(items[4]) && greenClicked.includes(items[7])) || ((greenClicked.includes(items[2]) && greenClicked.includes(items[5]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[2]) && greenClicked.includes(items[4]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[4]) && greenClicked.includes(items[8]))
     )) {
 
         alert('congragulations yo green')
-        const x = prompt('wanna play again? y for yes n for no');
+        const x = prompt('wanna play again? y for yes, or enter anyting to exit');
         restIt(x);
     }
     if ((redClicked.includes(items[0]) && redClicked.includes(items[1]) && redClicked.includes(items[2])) || (redClicked.includes(items[3]) && redClicked.includes(items[4]) && redClicked.includes(items[5])) || (redClicked.includes(items[6]) && redClicked.includes(items[7]) && redClicked.includes(items[8])) || (redClicked.includes(items[0]) && redClicked.includes(items[3]) && redClicked.includes(items[6])) || (redClicked.includes(items[1]) && redClicked.includes(items[4]) && redClicked.includes(items[7])) || ((redClicked.includes(items[2]) && redClicked.includes(items[5]) && redClicked.includes(items[8])) || (redClicked.includes(items[2]) && redClicked.includes(items[4]) && redClicked.includes(items[6])) || (redClicked.includes(items[0]) && redClicked.includes(items[4]) && redClicked.includes(items[8]))
     )) {
 
         alert('congragulations yo red')
-        const x = prompt('wanna play again? y for yes n for no');
+        const x = prompt('wanna play again? y for yes, or enter anything to exit');
         restIt(x);
     }
     if (clickedItems.length == 9) {
         alert('no more there, tie the tie')
-        const x = prompt('wanna play again? y for yes n for no');
+        const x = prompt('wanna play again? y for yes, or enter anything to exit');
         restIt(x);
     }
 }
-for (i of items) {
-    i.addEventListener('mouseenter', turnGreen);
-    i.addEventListener('mouseenter', turnRed);
-    i.addEventListener('mouseout', turnDefault);
-    i.addEventListener('click', clicked);
-}
-const gamePlay = function () {
+
+const changeTurn = function () {
     if (playerGreen) {
         playerGreen = !playerGreen;
         playerRed = !playerRed;
@@ -100,3 +105,12 @@ const gamePlay = function () {
     }
 
 }
+
+
+const playIt = function () {
+    restIt('y');
+    changeTurn();
+}
+const playagain = document.querySelector('.playagain');
+playagain.addEventListener('click', playIt);
+
