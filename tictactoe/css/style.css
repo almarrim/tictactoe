@@ -56,3 +56,33 @@ body {
 .zindex {
   z-index: -2;
 }
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.container h3 {
+  text-align: center;
+}
+.container input {
+  margin: 10px;
+}
+.human {
+  /* background-color: red; */
+  text-align: center;
+}
+.comp {
+  /* display: flex;
+  justify-content: center; */
+}
+/* .human {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+}
+.comp{
+  position: absolute;
+  top: 45%;
+  left: 50%;
+} */
