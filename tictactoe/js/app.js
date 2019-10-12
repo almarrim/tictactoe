@@ -1,17 +1,25 @@
 console.log('hey man')
 const items = document.querySelectorAll('.items');
 const board = document.querySelector('.board');
+const seeYou = document.querySelector('.Goodbye');
 const playagain = document.querySelector('.playagain');
+const result1 = document.querySelector('.score1');
+const result2 = document.querySelector('.score2');
 const clickedItems = [];
 const greenClicked = [];
 const redClicked = [];
 let playerGreen = true;
 let playerRed = false;
+let playerOne;
+let playerTwo;
+let score1 = 0;
+
+let score2 = 0;
 const gameStyle = ['human', 'easy', 'medium', 'hard']
 let selectStyle = 0;
 const players = ['Green', 'Red', 'Tie'];
 let selectPlayer = 2;
-const playStyle = ['human', 'dumpComp']
+const playStyle = ['human', 'dumpComp'];
 if (window.location.href.match('gameSetting.html') != null) {
     const moveToPlay = function () {
         if (document.querySelector('.two').checked) {
@@ -50,7 +58,6 @@ if (window.location.href.match('index.html') != null) {
         sessionStorage.removeItem('x')
     }
 
-
     const turnGreen = function () {
         if (playerGreen)
             this.className += ' green';
@@ -87,7 +94,7 @@ if (window.location.href.match('index.html') != null) {
         i.addEventListener('mouseout', turnDefault);
         i.addEventListener('click', clicked);
     }
-    const restIt = function (x) {
+    const resetIt = function (x) {
         console.log('enter resetIT')
 
 
@@ -113,11 +120,14 @@ if (window.location.href.match('index.html') != null) {
             playerGreen = true;
             playerRed = false;
             board.className = 'board';
+            seeYou.className = 'Goodbye';
             selectPlayer = 2;
+            console.log('scoreing 1', score1)
             return console.log('this is a new game');
         }
         else {
             board.className += ' zindex';
+            seeYou.className += ' opacity';
             return console.log('see ya later dogg');
         }
         console.log('leave reset')
@@ -277,7 +287,7 @@ if (window.location.href.match('index.html') != null) {
             alert('Congraulation yo ' + players[selectPlayer])
         }
         const x = prompt('wanna play again? y for yes, or enter anything to exit');
-        restIt(x);
+        resetIt(x);
         return console.log('got Delayed');
     }
     const changeTurn = function () {
@@ -316,8 +326,18 @@ if (window.location.href.match('index.html') != null) {
             }
         }
         if (!gameStatus()) {
+            switch (selectPlayer) {
+                case 0:
+                    score1++;
+                    break;
+                case 1:
+                    score2;
+                    break;
+                case 2:
+                    break;
+            }
             setTimeout(announceIt, 10);
-
+            scoring(score1, score2)
 
         }
         console.log('leave gamePlay')
@@ -329,5 +349,27 @@ if (window.location.href.match('index.html') != null) {
     }
 
     playagain.addEventListener('click', playIt);
-    restIt('y');
+    resetIt('y');
+    console.log('scoreing 2', score1)
+
+
+    const namingPlayers = function () {
+        if (gameStyle[selectStyle] == 'human') {
+            playerOne = prompt('Green Player Name') || 'Player One';
+            playerTwo = prompt('Red Player Name');
+        }
+        else {
+            playerOne = prompt('Green Player Name');
+            playerTwo = gameStyle[selectStyle].slice(0, 1).toUpperCase() + gameStyle[selectStyle].slice(1) + ' Difficulity Computer';
+        }
+        document.querySelector('.name1').innerText = playerOne;
+        document.querySelector('.name2').innerText = playerTwo;
+    }();
+    const scoring = function (score1 = 0, score2 = 0) {
+        console.log(score1, 'score1');
+        result1.innerHTML = score1;
+        result2.innerText = score2;
+    };
+    scoring();
+
 }
