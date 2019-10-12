@@ -10,20 +10,26 @@
 </head>
 
 <body>
-    <form class="container" size="2">
+    <div class="container">
         <h2> Play Vs
         </h2>
         <div class="human">
             <h3>Human</h3>
-            <input type="radio" class="selection1" name="player2"></input>
+            <input type="radio" class="selection one" name="player2" value="human" checked></input>
         </div>
         <div class="comp">
             <h3>Computer</h3>
-            <input type="radio" class="selection2" name='player2'>Easy</input>
-            <input type="radio" class="selection3" name="player2">Medium</input>
-            <input type="radio" class="selection4" name="player2">Hard</input>
+            <input type="radio" class="selection two" name='player2' value="easy">Easy</input>
+            <input type="radio" class="selection three" name="player2" value="medium">Medium</input>
+            <input type="radio" class="selection four" name="player2" value="hard">Hard</input>
         </div>
-    </form>
+        <div class="button">
+            <input type="button" value="Play" id='playbutton'></input>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/gameSetting.js"></script>
 
 </body>
 

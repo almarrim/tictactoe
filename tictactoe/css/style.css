@@ -57,24 +57,40 @@ body {
   z-index: -2;
 }
 .container {
+  /* background-color: yellow; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+.container h2 {
+  margin-bottom: 0;
+}
 .container h3 {
+  margin: 0 auto;
   text-align: center;
 }
 .container input {
-  margin: 10px;
+  margin: 2px 10px;
 }
 .human {
+  margin: 10px auto;
   /* background-color: red; */
   text-align: center;
 }
 .comp {
-  /* display: flex;
-  justify-content: center; */
+  margin: 10px auto;
+  /* background-color: red; */
+  text-align: center;
+}
+.container .button {
+  /* background-color: red; */
+  margin: 010 auto;
+  text-align: center;
+}
+.button input {
+  width: 50%;
+  height: 20px;
 }
 /* .human {
   position: absolute;
