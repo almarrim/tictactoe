@@ -154,11 +154,11 @@ if (window.location.href.match('index.html') != null) {
         return true;
     }
 
-    const dumbComp = function () {
+    const dumbComp = function (selection) {
         console.log('enter dumbComp')
 
         if (clickedItems.length < 9) {
-            let selection = items[Math.floor(Math.random() * 9)];
+            selection = items[Math.floor(Math.random() * 9)];
             let i = 0;
             while (i == 0) {
                 if (!(clickedItems.includes(selection))) {
@@ -180,6 +180,93 @@ if (window.location.href.match('index.html') != null) {
         console.log('leave dumbComp')
 
     }
+    const medBrain = function (winClick, selection) {
+        const beatClick = [];
+        console.log(selection, 'initial medBrain')
+        for (i of winClick) {
+            if (greenClicked.includes(items[i])) {
+                beatClick.push(items[i])
+            }
+        }
+        if (beatClick.length == 2) {
+            for (i of winClick) {
+                if ((!(beatClick.includes(items[i]))) && (!(redClicked.includes(items[i])))) {
+                    selection = items[i];
+                    console.log(selection, 'found')
+                    return selection;
+                }
+
+            }
+        }
+        console.log(selection, 'end medbrain')
+
+    }
+    const medComp = function () {
+        let selection;
+        console.log(selection, 'initial')
+        if (greenClicked.includes(items[0]) || greenClicked.includes(items[1]) || greenClicked.includes(items[2])) {
+            console.log(1)
+            const winClick = ['0', '1', '2'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[3]) || greenClicked.includes(items[4]) || greenClicked.includes(items[5]))) {
+            console.log(2)
+
+            const winClick = ['3', '4', '5'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[6]) || greenClicked.includes(items[7]) || greenClicked.includes(items[8]))) {
+            console.log(3)
+
+            const winClick = ['6', '7', '8'];
+            selection = medBrain(winClick, selection);
+        }
+
+        if ((!selection) && (greenClicked.includes(items[0]) || greenClicked.includes(items[3]) || greenClicked.includes(items[6]))) {
+            console.log(4)
+
+            const winClick = ['0', '3', '6'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[1]) || greenClicked.includes(items[4]) || greenClicked.includes(items[7]))) {
+            console.log(5)
+            const winClick = ['1', '4', '7'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[2]) || greenClicked.includes(items[5]) || greenClicked.includes(items[8]))) {
+            console.log(6)
+
+            const winClick = ['2', '5', '8'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[2]) || greenClicked.includes(items[4]) || greenClicked.includes(items[6]))) {
+            console.log(7)
+
+            const winClick = ['2', '4', '6'];
+            selection = medBrain(winClick, selection);
+        }
+        if ((!selection) && (greenClicked.includes(items[0]) || greenClicked.includes(items[4]) || greenClicked.includes(items[8]))) {
+            console.log(8)
+            const winClick = ['0', '4', '8'];
+            selection = medBrain(winClick, selection);
+            console.log(selection)
+        }
+        console.log(selection, 'selection')
+        if (selection) {
+            console.log('enter selection')
+            selection.className += ' red';
+            clickedItems.push(selection);
+            redClicked.push(selection);
+            selection.removeEventListener('mouseenter', turnGreen);
+            selection.removeEventListener('mouseenter', turnRed);
+            selection.removeEventListener('mouseout', turnDefault);
+        }
+        else {
+            console.log('eneter else selection')
+            dumbComp(selection)
+        }
+    }
+
     const announceIt = function () {
         if (selectPlayer == 2) {
             console.log('tie side')
@@ -219,6 +306,10 @@ if (window.location.href.match('index.html') != null) {
             switch (gameStyle[selectStyle]) {
                 case 'easy':
                     dumbComp();
+                    changeTurn();
+                    break;
+                case 'medium':
+                    medComp();
                     changeTurn();
                     break;
 
