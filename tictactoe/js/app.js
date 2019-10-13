@@ -203,7 +203,7 @@ if (window.location.href.match('index.html') != null) {
         }
         if (beatClick.length == 2) {
             for (i of winClick) {
-                if ((!(beatClick.includes(items[i]))) && (!(redClicked.includes(items[i])))) {
+                if ((!(beatClick.includes(items[i]))) && (!(clickedItems.includes(items[i])))) {
                     selection = items[i];
                     console.log(selection, 'found')
                     return selection;
