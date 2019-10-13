@@ -8,18 +8,20 @@ const result2 = document.querySelector('.score2');
 const clickedItems = [];
 const greenClicked = [];
 const redClicked = [];
+const virtualBoard = [];
 let playerGreen = true;
 let playerRed = false;
 let playerOne;
 let playerTwo;
 let score1 = 0;
-
 let score2 = 0;
 const gameStyle = ['human', 'easy', 'medium', 'hard']
-let selectStyle = 0;
+let selectStyle = 2;
 const players = ['Green', 'Red', 'Tie'];
 let selectPlayer = 2;
 const playStyle = ['human', 'dumpComp'];
+const beatStyle = ['corner', 'center', 'middle'];
+let beatSelector;
 if (window.location.href.match('gameSetting.html') != null) {
     const moveToPlay = function () {
         if (document.querySelector('.two').checked) {
@@ -190,11 +192,12 @@ if (window.location.href.match('index.html') != null) {
         console.log('leave dumbComp')
 
     }
-    const medBrain = function (winClick, selection) {
+    const medBrain = function (winClick, selection, player) {
+        console.log(player, 'player')
         const beatClick = [];
         console.log(selection, 'initial medBrain')
         for (i of winClick) {
-            if (greenClicked.includes(items[i])) {
+            if (player.includes(items[i])) {
                 beatClick.push(items[i])
             }
         }
@@ -211,55 +214,85 @@ if (window.location.href.match('index.html') != null) {
         console.log(selection, 'end medbrain')
 
     }
+
     const medComp = function () {
         let selection;
-        console.log(selection, 'initial')
-        if (greenClicked.includes(items[0]) || greenClicked.includes(items[1]) || greenClicked.includes(items[2])) {
-            console.log(1)
-            const winClick = ['0', '1', '2'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[3]) || greenClicked.includes(items[4]) || greenClicked.includes(items[5]))) {
-            console.log(2)
+        let player = redClicked;
+        for (i in [1, 1]) {
+            console.log(i, 'iiiii')
+            if (i == 1)
+                player = greenClicked
+            if ((!selection) && (player.includes(items[0]) || player.includes(items[1]) || player.includes(items[2]))) {
+                console.log(1)
+                const winClick = ['0', '1', '2'];
+                // if (i == 0)
+                selection = medBrain(winClick, selection, player);
+                // if (i == 1)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[3]) || player.includes(items[4]) || player.includes(items[5]))) {
+                console.log(2)
 
-            const winClick = ['3', '4', '5'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[6]) || greenClicked.includes(items[7]) || greenClicked.includes(items[8]))) {
-            console.log(3)
+                const winClick = ['3', '4', '5'];
+                // if (i == 0)
+                selection = medBrain(winClick, selection, player);
+                // if (i == 1)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[6]) || player.includes(items[7]) || player.includes(items[8]))) {
+                console.log(3)
 
-            const winClick = ['6', '7', '8'];
-            selection = medBrain(winClick, selection);
-        }
+                const winClick = ['6', '7', '8'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
 
-        if ((!selection) && (greenClicked.includes(items[0]) || greenClicked.includes(items[3]) || greenClicked.includes(items[6]))) {
-            console.log(4)
+            if ((!selection) && (player.includes(items[0]) || player.includes(items[3]) || player.includes(items[6]))) {
+                console.log(4)
 
-            const winClick = ['0', '3', '6'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[1]) || greenClicked.includes(items[4]) || greenClicked.includes(items[7]))) {
-            console.log(5)
-            const winClick = ['1', '4', '7'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[2]) || greenClicked.includes(items[5]) || greenClicked.includes(items[8]))) {
-            console.log(6)
+                const winClick = ['0', '3', '6'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[1]) || player.includes(items[4]) || player.includes(items[7]))) {
+                console.log(5)
+                const winClick = ['1', '4', '7'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[2]) || player.includes(items[5]) || player.includes(items[8]))) {
+                console.log(6)
 
-            const winClick = ['2', '5', '8'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[2]) || greenClicked.includes(items[4]) || greenClicked.includes(items[6]))) {
-            console.log(7)
+                const winClick = ['2', '5', '8'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[2]) || player.includes(items[4]) || player.includes(items[6]))) {
+                console.log(7)
 
-            const winClick = ['2', '4', '6'];
-            selection = medBrain(winClick, selection);
-        }
-        if ((!selection) && (greenClicked.includes(items[0]) || greenClicked.includes(items[4]) || greenClicked.includes(items[8]))) {
-            console.log(8)
-            const winClick = ['0', '4', '8'];
-            selection = medBrain(winClick, selection);
-            console.log(selection)
+                const winClick = ['2', '4', '6'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+            }
+            if ((!selection) && (player.includes(items[0]) || player.includes(items[4]) || player.includes(items[8]))) {
+                console.log(8)
+                const winClick = ['0', '4', '8'];
+                // if (!i)
+                selection = medBrain(winClick, selection, player);
+                // if (i)
+                //     selection = medBrain(winClick, selection, greenClicked);
+                console.log(selection)
+            }
         }
         console.log(selection, 'selection')
         if (selection) {
@@ -276,6 +309,82 @@ if (window.location.href.match('index.html') != null) {
             dumbComp(selection)
         }
     }
+    // const hardBrain = function (playerClicked, beatSelector, selection) {
+    //     if (clicked.length == 1) {
+
+    //         if (clicked[0] == items[4]) {
+    //             selection = items[0];
+    //             return selection;
+    //         }
+    //         else {
+    //             selection = itmes[0];
+    //             for (i of items.slice(items.indexOf(playerClicked)))
+    //                 virtualBoard.push(i);
+    //             for (i of items.slice(items.indexOf(0, playerClicked))) {
+    //                 virtualBoard.push(i);
+    //             }
+    //         }
+    //     }
+    // }
+    //     else {
+    //     switch (beatSelector) {
+    //         case 0:
+    //             // const checker = clicked.join('');
+    //             if (greenClicked[1] == virtualBoard[8]) {
+    //                 if (redClicked.length == 1) {
+    //                     redClicked.push(virtualBoard[3])
+    //                 }
+    //                 else {
+    //                     if (greenClicked[2] == virtualBoard[5]) {
+    //                         if (redClicked.length == 2) {
+    //                             redClicked.push(virtualBoard[2]);
+    //                         }
+    //                         else {
+    //                             if (greenClicked[4] == virtualBoard[6]) {
+    //                                 if (greenClicked[5] == virtualBoard[7]) {
+
+    //                                 }
+    //                                 else {
+    //                                     redClicked.push(virtualBoard[7])
+    //                                 }
+    //                             }
+    //                             else {
+    //                                 redClicked.push(virtualBoard[6])
+    //                             }
+    //                         }
+    //                     }
+    //                     else {
+    //                         redClicked.push(virtualBoard[5])
+    //                     }
+    //                 }
+    //                 else {
+    //                     redClicked.push(virtualBoard[3])
+    //                 }
+
+    //             }
+    //     }
+    // }
+
+
+    // const hardComp = function () {
+
+    //     const playerClicked = clicked[clicked.length - 1];
+
+    //     if ((!beatSelector) && ([items[0], items[2], items[6], items[8]].includes(playerClicked))) {
+    //         beatSelector = 0;
+    //     }
+    //     if ((!beatSelector) && (playerClicked == items[4])) {
+    //         beatSelector = 1;
+    //     }
+    //     if ((!beatSelector) && ([items[1], items[3], items[5], items[7]].includes(playerClicked))) {
+    //         beatSelector = 2;
+
+    //         medBrain(playerClicked, beatSelector, selection);
+
+
+
+    //     }
+    // }
 
     const announceIt = function () {
         if (selectPlayer == 2) {
@@ -331,7 +440,7 @@ if (window.location.href.match('index.html') != null) {
                     score1++;
                     break;
                 case 1:
-                    score2;
+                    score2++;
                     break;
                 case 2:
                     break;
