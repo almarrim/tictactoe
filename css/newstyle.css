@@ -25,12 +25,12 @@ html {
 }
 .parallax1 {
   background: url(../images/cityriver.jpg);
-  min-height: 100%;
+  min-height: 60%;
 }
 
 .parallax2 {
   background: url(../images/corey-o-brien-YSXxHr2T0_8-unsplash.jpg);
-  min-height: 80%;
+  min-height: 60%;
 }
 .parallax3 {
   background: url(../images/cityriver.jpg);
@@ -133,18 +133,20 @@ html {
 .player1info,
 .player2info,
 .tie {
-  height: 100px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 150px;
   padding: 5px;
   font-size: 1.5rem;
+  border-radius: 3px;
 }
 .tie {
   background-color: rgba(218, 228, 163, 0.35);
   height: 50px;
   line-height: 50px;
+  width: 80px;
 }
 .board {
   min-width: 500px;
@@ -288,7 +290,7 @@ html {
     margin: auto;
   }
 }
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
   .board {
     height: 300px;
     max-width: 80%;
@@ -307,8 +309,8 @@ html {
   #gamePlay {
     padding: 50px;
   }
-}
-@media only screen and (max-width: 500px) {
+} */
+@media only screen and (max-width: 700px) {
   #gameplay,
   .board,
   .info,
@@ -320,20 +322,20 @@ html {
     display: flex;
     flex-direction: column;
   }
-  .playagain {
+  /* .playagain {
     order: 1;
   }
   .info {
     order: 3;
-  }
+  } */
   .sorry {
-    order: 2;
+    /* order: 2; */
     visibility: visible;
     font-size: 2rem;
     min-height: 500px;
     line-height: 500px;
   }
-  .board {
+  /* .board {
     order: 4;
-  }
+  } */
 }
