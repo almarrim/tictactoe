@@ -478,5 +478,5 @@ const humanButton = document.querySelector('.hue')
 humanButton.addEventListener('click', showIt);
 const ontop = function () {
     window.location.href = '#para0'
-
-}()
+}
+setTimeout(ontop, 500);
