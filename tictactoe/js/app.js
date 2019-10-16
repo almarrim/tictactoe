@@ -32,6 +32,16 @@ let selectPlayer = 2;
 const playStyle = ['human', 'dumpComp'];
 const beatStyle = ['corner', 'center', 'middle'];
 let beatSelector;
+
+
+const settingHovere = function () {
+    playagain.className = 'header-cont playagain settingHover'
+}
+const settingDefault = function () {
+    playagain.className = 'header-cont playagain'
+}
+playagain.addEventListener('mouseenter', settingHovere)
+playagain.addEventListener('mouseout', settingDefault)
 // if (window.location.href.match('gameSetting.html') != null) {
 //     const moveToPlay = function () {
 //         if (document.querySelector('.two').checked) {
