@@ -8,14 +8,16 @@ const result2 = document.querySelector('.score2');
 const tie = document.querySelector('.tie');
 // const tokenx = document.querySelector('.token1x');
 // const tokeno = document.querySelector('.token1o');
-const player1info = document.querySelector('.player1info');
-const player2info = document.querySelector('.player2info');
+// const player1info = document.querySelector('.player1info');
+// const player2info = document.querySelector('.player2info');
 const clickedItems = [];
 const greenClicked = [];
 const redClicked = [];
 const virtualBoard = [];
 let playerOneToken = 'X';
 let playerTwoToken = 'O';
+// let player1class = ' green';
+// let player2class = ' red';
 let playerGreen = true;
 let playerRed = false;
 let playerOne;
@@ -131,27 +133,31 @@ const moveToPlay = function () {
     if (document.querySelector('.token1o').checked) {
         playerOneToken = 'O';
         playerTwoToken = 'X';
-        player1info.className = 'player1info redinfo'
-        player2info.className = 'player2info greeninfo'
+        // player1info.className = 'player1info '
+        // player2info.className = 'player2info '
+        // player1class = ' red';
+        // player2class = ' green';
+
 
     }
     else {
         playerOneToken = 'X';
         playerTwoToken = 'O';
-        player1info.className = 'player1info greeninfo'
-        player2info.className = 'player2info redinfo'
+        // player1info.className = 'player1info '
+        // player2info.className = 'player2info '
+        // player1class = ' green';
+        // player2class = ' red';
     }
     console.log(selectStyle, 'selectStyle')
     localStorage.setItem('x', selectStyle);
-    playerOne = document.querySelector('.thenames1').value
+    playerOne = document.querySelector('.thenames1').value || 'Player One';
     document.querySelector('.name1').innerText = playerOne;
     if (document.querySelector('.thenames2').value) {
-        playerTwo = document.querySelector('.thenames2').value
+        playerTwo = document.querySelector('.thenames2').value || 'Player Two';
         document.querySelector('.name2').innerText = playerTwo;
     }
     console.log(' localstorage')
     // window.location.replace('index.html')
-
 }
 
 const playButton = document.querySelector('#playbutton');
@@ -187,6 +193,7 @@ const clicked = function () {
     if (playerGreen) {
         greenClicked.push(this);
         this.innerText = playerOneToken;
+
         console.log('greenclicked', this)
     }
     if (playerRed) {
@@ -565,9 +572,9 @@ console.log('scoreing 2', score1)
 // } ();
 const scoring = function (score1 = 0, score2 = 0, scoretie = 0) {
     console.log(score1, 'score1');
-    result1.innerHTML = 'Win ' + score1;
+    result1.innerText = 'Win ' + score1;
     result2.innerText = 'Win ' + score2;
-    tie.innerHTML = scoretie;
+    tie.innerText = 'tie ' + scoretie;
 
 };
 scoring();

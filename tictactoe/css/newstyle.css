@@ -7,14 +7,16 @@ html {
   /* color: #ff0000; */
   background-color: black;
   color: white;
+  font-family: Helvetica, sans-serif;
 }
 .parallax0 {
   background-color: black;
   min-height: 100%;
+  font-family: "Times New Roman", Times, serif;
 }
 .setting {
   font-size: 5rem;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Helvetica, sans-serif; */
   text-transform: uppercase;
   letter-spacing: 3px;
   position: absolute;
@@ -159,17 +161,24 @@ html {
   padding: 5px;
   text-align: left;
   font-size: 2rem;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Helvetica, sans-serif; */
+  font-weight: 100;
 }
 .player1info,
-.player2info {
-  height: 300px;
+.player2info,
+.tie {
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100px;
+  width: 150px;
   padding: 5px;
   font-size: 1.5rem;
+}
+.tie {
+  background-color: rgba(218, 228, 163, 0.35);
+  height: 50px;
+  line-height: 50px;
 }
 .board {
   /* background-color: red; */
@@ -241,6 +250,8 @@ html {
   height: 100%;
   top: 50%;
   padding: 100px;
+  letter-spacing: 2px;
+  /* font-family: "Times New Roman", Times, serif; */
 }
 
 .container h2:hover {
@@ -249,6 +260,9 @@ html {
 
 .human h3:hover {
   color: rgba(255, 255, 0);
+}
+.comp {
+  letter-spacing: 1px;
 }
 .comp input {
   margin: 10px;
@@ -273,4 +287,7 @@ html {
   visibility: visible;
 }
 .Goodbye {
+}
+
+@media only screen {
 }
