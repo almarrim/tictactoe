@@ -476,4 +476,7 @@ for (i of compButtons) {
 
 const humanButton = document.querySelector('.hue')
 humanButton.addEventListener('click', showIt);
-window.location.href = '#para0'
+const ontop = function () {
+    window.location.href = '#para0'
+
+}()
