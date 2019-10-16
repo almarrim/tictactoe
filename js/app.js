@@ -6,18 +6,13 @@ const playagain = document.querySelector('.playagain');
 const result1 = document.querySelector('.score1');
 const result2 = document.querySelector('.score2');
 const tie = document.querySelector('.tie');
-// const tokenx = document.querySelector('.token1x');
-// const tokeno = document.querySelector('.token1o');
-// const player1info = document.querySelector('.player1info');
-// const player2info = document.querySelector('.player2info');
+const playButton = document.querySelector('#playbutton');
 const clickedItems = [];
 const greenClicked = [];
 const redClicked = [];
 const virtualBoard = [];
 let playerOneToken = 'X';
 let playerTwoToken = 'O';
-// let player1class = ' green';
-// let player2class = ' red';
 let playerGreen = true;
 let playerRed = false;
 let playerOne;
@@ -32,44 +27,11 @@ let selectPlayer = 2;
 const playStyle = ['human', 'dumpComp'];
 const beatStyle = ['corner', 'center', 'middle'];
 let beatSelector;
-// if (window.location.href.match('gameSetting.html') != null) {
-//     const moveToPlay = function () {
-//         if (document.querySelector('.two').checked) {
-//             selectStyle = 1;
-//             window.location.href = '#gamePlay'
-//         }
-//         else if (document.querySelector('.three').checked) {
-//             selectStyle = 2;
-//             window.location.href = '#gamePlay'
-//         }
 
-//         else if (document.querySelector('.four').checked) {
-//             selectStyle = 3;
-//             console.log(document.querySelector('.four').checked, 'four')
-//             window.location.href = '#gamePlay'
 
-//         }
-//         else if (document.querySelector('.one').checked) {
-//             selectStyle = 0;
-//             console.log(document.querySelector('.one').checked, 'one')
-//             window.location.href = '#gamePlay'
-
-//         }
-
-//         console.log(selectStyle, 'selectStyle')
-//         sessionStorage.setItem('x', selectStyle)
-
-//         console.log(' localstorage')
-//         window.location.replace('index.html')
-
-//     }
-
-// }
-// if (window.location.href.match('index.html') != null) {
+//reset function: it removes all the changes
 const resetIt = function (x) {
     console.log('enter resetIT')
-
-
 
     for (i of items) {
         i.addEventListener('mouseenter', turnGreen);
@@ -78,7 +40,6 @@ const resetIt = function (x) {
         i.addEventListener('click', clicked);
         i.className = 'items';
         i.innerText = '';
-
     }
 
     while (clickedItems.length > 0) {
@@ -107,6 +68,8 @@ const resetIt = function (x) {
     console.log('leave reset')
 
 }
+
+//this is the function that takes the game style and names info and assign info accordingly
 const moveToPlay = function () {
     resetIt();
     if (document.querySelector('.two').checked) {
@@ -133,20 +96,11 @@ const moveToPlay = function () {
     if (document.querySelector('.token1o').checked) {
         playerOneToken = 'O';
         playerTwoToken = 'X';
-        // player1info.className = 'player1info '
-        // player2info.className = 'player2info '
-        // player1class = ' red';
-        // player2class = ' green';
-
 
     }
     else {
         playerOneToken = 'X';
         playerTwoToken = 'O';
-        // player1info.className = 'player1info '
-        // player2info.className = 'player2info '
-        // player1class = ' green';
-        // player2class = ' red';
     }
     console.log(selectStyle, 'selectStyle')
     localStorage.setItem('x', selectStyle);
@@ -157,33 +111,31 @@ const moveToPlay = function () {
         document.querySelector('.name2').innerText = playerTwo;
     }
     console.log(' localstorage')
-    // window.location.replace('index.html')
 }
 
-const playButton = document.querySelector('#playbutton');
 
+
+//add a click event to the play button in the game style
 playButton.addEventListener('click', moveToPlay)
 
-// if (sessionStorage.getItem('x')) {
-//     selectStyle = sessionStorage.getItem('x');
-//     sessionStorage.removeItem('x')
-// }
-
+//part of the hover effect. it gets called when the pointer eneters
 const turnGreen = function () {
     if (playerGreen)
         this.className += ' green';
 }
+//part of the hover effect. it gets called when the pointer eneters
 const turnRed = function () {
     if (playerRed)
         this.className += ' red';
 }
-const hover = function () {
-    this.className += ' hover';
-    console.log('hover all over')
-}
+
+//part of the hover effect. it gets called when the pointer leaves and returns to default effect
 const turnDefault = function () {
     this.className = 'items';
 }
+
+//the click function removes events from clicked buttons. it assign the clicked box to the respective player.
+//it calls gamePlay(). gamePlay deals with the whole game functionality.
 const clicked = function () {
     console.log('enter clicked')
     this.removeEventListener('mouseenter', turnGreen);
@@ -207,31 +159,21 @@ const clicked = function () {
     console.log('leave clicked')
 
 }
+//add events to board boxes to allow hover effect and click functionality
 for (i of items) {
     i.addEventListener('mouseenter', turnGreen);
-    i.addEventListener('mouseenter', hover);
     i.addEventListener('mouseenter', turnRed);
     i.addEventListener('mouseout', turnDefault);
     i.addEventListener('click', clicked);
 }
-const boardhover = function () {
-    this.className += ' boardhover'
-}
-const boardDefault = function () {
-    this.className = 'board';
-    console.log('here');
-}
-board.addEventListener('mouseover', boardhover);
-board.addEventListener('mouseout', boardDefault);
 
-
+//gameStatus wroks as verifies the winner and return if the game is on/off 
 const gameStatus = function () {
     console.log('enter gamestatus')
 
     if ((greenClicked.includes(items[0]) && greenClicked.includes(items[1]) && greenClicked.includes(items[2])) || (greenClicked.includes(items[3]) && greenClicked.includes(items[4]) && greenClicked.includes(items[5])) || (greenClicked.includes(items[6]) && greenClicked.includes(items[7]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[3]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[1]) && greenClicked.includes(items[4]) && greenClicked.includes(items[7])) || ((greenClicked.includes(items[2]) && greenClicked.includes(items[5]) && greenClicked.includes(items[8])) || (greenClicked.includes(items[2]) && greenClicked.includes(items[4]) && greenClicked.includes(items[6])) || (greenClicked.includes(items[0]) && greenClicked.includes(items[4]) && greenClicked.includes(items[8]))
     )) {
 
-        // alert('congragulations yo green')
         console.log('leave green gamestatus')
         selectPlayer = 0;
         return false;
@@ -256,6 +198,7 @@ const gameStatus = function () {
     return true;
 }
 
+//this is the easy mode comp. selects moves randomly with no winning plan.
 const dumbComp = function (selection) {
     console.log('enter dumbComp')
 
@@ -285,6 +228,10 @@ const dumbComp = function (selection) {
     console.log('leave dumbComp')
 
 }
+
+
+//It gets called by medComp. medBrain uses the info passed by the medComp to determin the next move.
+//First, it looks for a winning move.If it doesn't find one. It looks for if the opisit player has a winning move to prevent him from winning.
 const medBrain = function (winClick, selection, player) {
     console.log(player, 'player')
     const beatClick = [];
@@ -308,6 +255,8 @@ const medBrain = function (winClick, selection, player) {
 
 }
 
+//passes all the possible winning solutions to medBrain, where checking is happening. if medBrain returns a recommended move, it will use it.
+//else, it will call dumbComp for a random move.
 const medComp = function () {
     let selection;
     let player = redClicked;
@@ -318,72 +267,53 @@ const medComp = function () {
         if ((!selection) && (player.includes(items[0]) || player.includes(items[1]) || player.includes(items[2]))) {
             console.log(1)
             const winClick = ['0', '1', '2'];
-            // if (i == 0)
+
             selection = medBrain(winClick, selection, player);
-            // if (i == 1)
-            //     selection = medBrain(winClick, selection, greenClicked);
+
         }
         if ((!selection) && (player.includes(items[3]) || player.includes(items[4]) || player.includes(items[5]))) {
             console.log(2)
 
             const winClick = ['3', '4', '5'];
-            // if (i == 0)
+
             selection = medBrain(winClick, selection, player);
-            // if (i == 1)
-            //     selection = medBrain(winClick, selection, greenClicked);
+
         }
         if ((!selection) && (player.includes(items[6]) || player.includes(items[7]) || player.includes(items[8]))) {
             console.log(3)
-
             const winClick = ['6', '7', '8'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
         }
 
         if ((!selection) && (player.includes(items[0]) || player.includes(items[3]) || player.includes(items[6]))) {
             console.log(4)
 
             const winClick = ['0', '3', '6'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
+
         }
         if ((!selection) && (player.includes(items[1]) || player.includes(items[4]) || player.includes(items[7]))) {
             console.log(5)
             const winClick = ['1', '4', '7'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
+
         }
         if ((!selection) && (player.includes(items[2]) || player.includes(items[5]) || player.includes(items[8]))) {
             console.log(6)
 
             const winClick = ['2', '5', '8'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
         }
         if ((!selection) && (player.includes(items[2]) || player.includes(items[4]) || player.includes(items[6]))) {
             console.log(7)
 
             const winClick = ['2', '4', '6'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
         }
         if ((!selection) && (player.includes(items[0]) || player.includes(items[4]) || player.includes(items[8]))) {
             console.log(8)
             const winClick = ['0', '4', '8'];
-            // if (!i)
             selection = medBrain(winClick, selection, player);
-            // if (i)
-            //     selection = medBrain(winClick, selection, greenClicked);
             console.log(selection)
         }
     }
@@ -403,83 +333,8 @@ const medComp = function () {
         dumbComp(selection)
     }
 }
-// const hardBrain = function (playerClicked, beatSelector, selection) {
-//     if (clicked.length == 1) {
 
-//         if (clicked[0] == items[4]) {
-//             selection = items[0];
-//             return selection;
-//         }
-//         else {
-//             selection = itmes[0];
-//             for (i of items.slice(items.indexOf(playerClicked)))
-//                 virtualBoard.push(i);
-//             for (i of items.slice(items.indexOf(0, playerClicked))) {
-//                 virtualBoard.push(i);
-//             }
-//         }
-//     }
-// }
-//     else {
-//     switch (beatSelector) {
-//         case 0:
-//             // const checker = clicked.join('');
-//             if (greenClicked[1] == virtualBoard[8]) {
-//                 if (redClicked.length == 1) {
-//                     redClicked.push(virtualBoard[3])
-//                 }
-//                 else {
-//                     if (greenClicked[2] == virtualBoard[5]) {
-//                         if (redClicked.length == 2) {
-//                             redClicked.push(virtualBoard[2]);
-//                         }
-//                         else {
-//                             if (greenClicked[4] == virtualBoard[6]) {
-//                                 if (greenClicked[5] == virtualBoard[7]) {
-
-//                                 }
-//                                 else {
-//                                     redClicked.push(virtualBoard[7])
-//                                 }
-//                             }
-//                             else {
-//                                 redClicked.push(virtualBoard[6])
-//                             }
-//                         }
-//                     }
-//                     else {
-//                         redClicked.push(virtualBoard[5])
-//                     }
-//                 }
-//                 else {
-//                     redClicked.push(virtualBoard[3])
-//                 }
-
-//             }
-//     }
-// }
-
-
-// const hardComp = function () {
-
-//     const playerClicked = clicked[clicked.length - 1];
-
-//     if ((!beatSelector) && ([items[0], items[2], items[6], items[8]].includes(playerClicked))) {
-//         beatSelector = 0;
-//     }
-//     if ((!beatSelector) && (playerClicked == items[4])) {
-//         beatSelector = 1;
-//     }
-//     if ((!beatSelector) && ([items[1], items[3], items[5], items[7]].includes(playerClicked))) {
-//         beatSelector = 2;
-
-//         medBrain(playerClicked, beatSelector, selection);
-
-
-
-//     }
-// }
-
+//announces the winner and takes the user response regarding playing another game
 const announceIt = function () {
     if (selectPlayer == 2) {
         console.log('tie side')
@@ -493,6 +348,8 @@ const announceIt = function () {
     resetIt(x);
     return console.log('got Delayed');
 }
+
+//it changes the players' turns
 const changeTurn = function () {
     console.log('enter changeTurn')
 
@@ -510,6 +367,8 @@ const changeTurn = function () {
 
 }
 
+//organizes all the reactions based on game style,
+// and sets when each function is called to give the whole experience.
 const gamePlay = function () {
     console.log('enter gamePlay')
     if (gameStatus()) {
@@ -522,7 +381,6 @@ const gamePlay = function () {
                 changeTurn();
                 break;
             case 'medium':
-                // setTimeout(medComp, 100)
                 medComp()
                 changeTurn()
                 break;
@@ -549,27 +407,16 @@ const gamePlay = function () {
 
 }
 
+//on click it takes the user to the gameStayle-settings page.
 const playIt = function () {
     window.location.href = '#cont'
 }
-
+//adds the playIt function to click event for the setting button
 playagain.addEventListener('click', playIt);
 resetIt('y');
 console.log('scoreing 2', score1)
 
-
-//     const namingPlayers = function () {
-//     if (gameStyle[selectStyle] == 'human') {
-//         playerOne = prompt('Green Player Name') || 'Player One';
-//         playerTwo = prompt('Red Player Name');
-//     }
-//     else {
-//         playerOne = prompt('Green Player Name');
-//         playerTwo = gameStyle[selectStyle].slice(0, 1).toUpperCase() + gameStyle[selectStyle].slice(1) + ' Difficulity Computer';
-//     }
-//     document.querySelector('.name1').innerText = playerOne;
-//     document.querySelector('.name2').innerText = playerTwo;
-// } ();
+//it keeps the score
 const scoring = function (score1 = 0, score2 = 0, scoretie = 0) {
     console.log(score1, 'score1');
     result1.innerText = 'Win ' + score1;
@@ -577,28 +424,13 @@ const scoring = function (score1 = 0, score2 = 0, scoretie = 0) {
     tie.innerText = 'tie ' + scoretie;
 
 };
+//initilizing the score
 scoring();
 
 
-// const tictactoe = document.querySelector('.tictactoe');
-// let c = 1;
-// const glow = function () {
 
-//     tictactoe.className = 'tictactoe glow' + c;
-//     if (c == 5) {
-//         c = 0
-//     }
-//     c++
-//     console.log('glow', c)
-// }
-// let d = 0
-// while (d < 20) {
-//     d++
-//     setTimeout(glow(), 10000)
-//     // setTimeglow();
-//     console.log('while')
-// }
 const startButton = document.querySelector('.start');
+//addshadow1 addshadow2 and removeglow gives the glowing effect and the layered shadow effect on click
 const addShadow1 = function () {
     startButton.className += ' shadow1'
 
@@ -619,11 +451,9 @@ const removeGlow = function () {
         startButton.className = 'start glow'
     }, 1000);
 
-    // addShadow1()
 }
 
 startButton.addEventListener('click', removeGlow);
-// startButton.addEventListener('click', )
 const compButtons = document.querySelectorAll('.com');
 const thenames2 = document.querySelector('.thenames2');
 
