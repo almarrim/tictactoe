@@ -313,7 +313,8 @@ html {
   .board,
   .info,
   .playagain {
-    visibility: hidden;
+    display: none;
+    /* visibility: hidden; */
   }
   #gameplay {
     display: flex;
@@ -329,6 +330,8 @@ html {
     order: 2;
     visibility: visible;
     font-size: 2rem;
+    min-height: 500px;
+    line-height: 500px;
   }
   .board {
     order: 4;
