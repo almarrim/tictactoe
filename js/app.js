@@ -35,6 +35,7 @@ const resetIt = function (x) {
 
     for (i of items) {
         i.addEventListener('mouseenter', turnGreen);
+        i.addEventListener('mouseenter', hover);
         i.addEventListener('mouseenter', turnRed);
         i.addEventListener('mouseout', turnDefault);
         i.addEventListener('click', clicked);
@@ -134,6 +135,10 @@ const turnDefault = function () {
     this.className = 'items';
 }
 
+const hover = function () {
+    this.className += ' hover';
+    console.log('hover all over')
+}
 //the click function removes events from clicked buttons. it assign the clicked box to the respective player.
 //it calls gamePlay(). gamePlay deals with the whole game functionality.
 const clicked = function () {
@@ -162,6 +167,7 @@ const clicked = function () {
 //add events to board boxes to allow hover effect and click functionality
 for (i of items) {
     i.addEventListener('mouseenter', turnGreen);
+    i.addEventListener('mouseenter', hover);
     i.addEventListener('mouseenter', turnRed);
     i.addEventListener('mouseout', turnDefault);
     i.addEventListener('click', clicked);

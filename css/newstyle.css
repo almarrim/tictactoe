@@ -260,8 +260,22 @@ html {
     margin: 0 4px;
   }
 }
-
+.hover {
+  width: 102%;
+  height: 102%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.button input {
+  background-color: white;
+}
 @media only screen and (max-width: 1100px) {
+  .body,
+  html {
+    font-size: 20px;
+  }
   .info {
     width: 100%;
     grid-area: info;
@@ -280,7 +294,6 @@ html {
     grid-area: board;
   }
   #gamePlay {
-    background-color: red;
     display: grid;
     grid-template-columns: (1fr) * 7;
     grid-template-rows: (1fr) * 4;
@@ -291,7 +304,7 @@ html {
   }
 }
 
-@media only screen and (max-width: 700px) {
+/* @media only screen and (max-width: 700px) {
   #gameplay,
   .board,
   .info,
@@ -308,5 +321,57 @@ html {
     font-size: 2rem;
     min-height: 500px;
     line-height: 500px;
+  }
+} */
+@media only screen and (max-width: 700px) {
+  .body,
+  html {
+    font-size: 10px;
+  }
+  #gamePlay {
+    margin: 10px 0;
+  }
+  #playbutton {
+    font-size: 1rem;
+  }
+  .board {
+    min-width: 200px;
+    width: 300px;
+    height: 300px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 1px;
+  }
+  .items {
+    font-size: 3rem;
+    line-height: 95px;
+  }
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 30%;
+    padding: 5px;
+    text-align: left;
+    font-size: 2.3rem;
+    font-weight: 100;
+    width: 230px;
+  }
+  .playagain {
+    width: 30px;
+    font-size: 10px;
+  }
+  .player1info,
+  .player2info,
+  .tie {
+    width: 80px;
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .tie {
+    width: 20px;
+    padding: 0;
   }
 }
