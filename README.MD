@@ -2,6 +2,9 @@ TICTACTOE
 This Game Was Created By Mohammed Almarri.
 It is a project for GA Software Engineering Immersive program.
 
+Demo:
+https://almarrim.github.io/tictactoe/
+
 Technologies used:
 -html
 -css
