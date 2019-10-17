@@ -3,8 +3,14 @@ This Game Was Created By Mohammed Almarri.
 It is a project for GA Software Engineering Immersive program.
 
 Technologies used:
+-html
+-css
+-Javascript
+
+tools:
 -vscode
 -chrome
+
 
 User Stories:
 -As a user, I am be able to start a new game
